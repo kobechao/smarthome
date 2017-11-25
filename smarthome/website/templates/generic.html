@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 
 <html>
-    {% load static %}
-	<head>
-		<title>Furniture controller</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
+	{% load static %}
+    <head>
+        <title>Furniture controller</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
         <noscript><link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" /></noscript>
 	</head>
 	<body class="is-loading">
@@ -26,7 +26,7 @@
 
 							<li><a href="light.html">open or close a light</a></li>
 							<li class="active"><a href="generic.html">Furniture controller</a></li>
-							<li><a href="fjs.html">Furniture.js</a></li>
+
 
 						</ul>
 						<ul class="icons">
@@ -45,6 +45,11 @@
 								<header class="major">
 									<span class="date">NCCUCS</span>
 
+
+
+
+
+
 										<div id="aaa"></div>
 
 										<div>Cooker temperature:
@@ -52,18 +57,40 @@
 										</div>
 										<button onclick="up(0)">up</button>
 										<button onclick="down(0)">down</button>
+										<select id="sel" size="2">
+											<option value="Samsung Induction Cooker" onclick="myfunction()">Samsung Induction Cooker</option>
+										</select>
+										<br>
+
+
 
 										<div>Refrigerator temperature:
 											<div id="volume1">15</div>
 										</div>
 										<button onclick="up(1)">up</button>
 										<button onclick="down(1)">down</button>
+										<select id="sel" size="2">
+											<option value="Samsung Refrigerator" onclick="myfunction_1()">Samsung Refrigerator</option>
+										</select>
+										<br>
+
+
+
 
 										<div>Alarm Volume:
 											<div id="volume2">20</div>
 										</div>
 										<button onclick="up(2)">up</button>
 										<button onclick="down(2)">down</button>
+										<select id="sel" size="2">
+											<option value="Samsung Alarm" onclick="myfunction_2()">Samsung Alarm</option>
+										</select>
+										<br>
+
+
+
+
+
 
 
 								</header>
@@ -92,13 +119,13 @@
 					document.getElementById("output").value = input;
 				}
 				function myfunction() {
-					document.getElementById("aaa").innerHTML = '{<br>"Samsung Induction Cooker":{<br>"Name": "Samsung Induction Cooker",<br>"Manufacturer":"Samsung",<br>"Manufacturing Date":"09/12",<br>"Service":["Boil", "Braise", "Deep-fry", "Preheat"]<br>}<br>}'
+					document.getElementById("aaa").innerHTML = '{<br>"Samsung Induction Cooker":{<br>"Name": "Samsung Induction Cooker",<br>"Manufacturer":"Samsung",<br>"Cooker temperature":"</div>'+volume[0]+'",<br>"Manufacturing Date":"09/12",<br>"Service":["Boil", "Braise", "Deep-fry", "Preheat"]<br>}<br>}'
 				}
 				function myfunction_1() {
-					document.getElementById("aaa").innerHTML = '{<br>"Samsung Refrigerator":{<br>"Name": "Samsung Refrigerator",<br>"Manufacturer":"Samsung",<br>"Manufacturing Date":"09/12",<br>"Service":["Chilling", "Ice Making"]<br>}<br>}'
+					document.getElementById("aaa").innerHTML = '{<br>"Samsung Refrigerator":{<br>"Name": "Samsung Refrigerator",<br>"Manufacturer":"Samsung",<br>"Refrigerator temperature":"</div>'+volume[1]+'",<br>Manufacturing Date":"09/12",<br>"Service":["Chilling", "Ice Making"]<br>}<br>}'
 				}
 				function myfunction_2() {
-					document.getElementById("aaa").innerHTML = '{<br>"Samsung Alarm":{<br>"Name": "Samsung Alarm",<br>"Manufacturer":"Samsung",<br>"Manufacturing Date":"09/12",<br>"Service":["On", "Off"]<br>}<br>}'
+					document.getElementById("aaa").innerHTML = '{<br>"Samsung Alarm":{<br>"Name": "Samsung Alarm",<br>"Manufacturer":"Samsung",<br>"Alarm Volume":"</div>'+volume[2]+'",<br>Manufacturing Date":"09/12",<br>"Service":["On", "Off"]<br>}<br>}'
 				}
 
 				function up(n) {
@@ -109,8 +136,7 @@
 				}
 
 			</script>
-			<!-- Scripts -->
-            <script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
             <script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
             <script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
             <script src="{% static 'website/assets/js/skel.min.js' %}"></script>

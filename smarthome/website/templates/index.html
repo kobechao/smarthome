@@ -1,13 +1,14 @@
 <!DOCTYPE HTML>
 
 <html>
-    {% load static %}
-	<head>
-		<title>Smart Home</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	{% load static %}
+    <head>
+        <title>Smart Home</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
         <noscript><link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" /></noscript>
+
 
 	</head>
 	<body class="is-loading">
@@ -36,7 +37,7 @@
 							<li class="active"><a href="index.html"> Room From 1 to 2</a></li>
 							<li><a href="light.html">open or close a light</a></li>
 							<li><a href="generic.html">Furniture controller</a></li>
-							<li><a href="fjs.html">Furniture.js</a></li>
+
 
 						</ul>
 
@@ -127,11 +128,12 @@
 											</script>
 
 		<!-- Scripts -->
-            <script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
             <script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
             <script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
             <script src="{% static 'website/assets/js/skel.min.js' %}"></script>
             <script src="{% static 'website/assets/js/util.js' %}"></script>
             <script src="{% static 'website/assets/js/main.js' %}"></script>
+
 	</body>
 </html>

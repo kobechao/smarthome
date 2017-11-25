@@ -1,13 +1,12 @@
 <!DOCTYPE HTML>
 
 <html>
-	{% load static %}
-    <head>
-        <title>light</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
-        <noscript><link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" /></noscript>
+	<head>
+		<title>light</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-loading">
 
@@ -55,10 +54,10 @@
 								function light(sw) {
 									var pic;
 									if (sw == 0) {
-                                        pic = "{% static 'website/images/pic_bulboff.gif' %}"
-                                    } else {
-                                        pic = "{% static 'website/images/pic_bulbon.gif' %}"
-                                    }
+										pic = "images/pic_bulboff.gif"
+									} else {
+										pic = "images/pic_bulbon.gif"
+									}
 									document.getElementById('myImage').src = pic;
 								}
 						</script>
@@ -88,7 +87,7 @@
 										<br>
 
 
-										<div><img id="myImage" src="{% static 'website/images/pic_bulboff.gif' %}" width="100" height="180"></div>
+										<div><img id="myImage" src="images/pic_bulboff.gif" width="100" height="180"></div>
 										<p>
 										<button type="button" onclick="light(1)">Light On</button>
 										<button type="button" onclick="light(0)">Light Off</button>

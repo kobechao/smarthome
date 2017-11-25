@@ -1,24 +1,15 @@
 <!DOCTYPE HTML>
 
 <html>
-	{% load static %}
-    <head>
-        <title>light</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
+    {% load static %}
+	<head>
+		<title>light</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
         <noscript><link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" /></noscript>
 	</head>
 	<body class="is-loading">
-
-
-
-
-
-
-
-
-
 
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -34,7 +25,7 @@
 							<li><a href="index.html">Room From 1 to 2</a></li>
               <li class="active"><a href="light.html">open or close a light</a></li>
 							<li><a href="generic.html">Furniture controller</a></li>
-
+              <li><a href="fjs.html">Furniture.js</a></li>
 
 						</ul>
 						<ul class="icons">
@@ -55,35 +46,20 @@
 								function light(sw) {
 									var pic;
 									if (sw == 0) {
-                                        pic = "{% static 'website/images/pic_bulboff.gif' %}"
-                                    } else {
-                                        pic = "{% static 'website/images/pic_bulbon.gif' %}"
-                                    }
+										pic = "{% static 'website/images/pic_bulboff.gif' %}"
+									} else {
+										pic = "{% static 'website/images/pic_bulbon.gif' %}"
+									}
 									document.getElementById('myImage').src = pic;
 								}
 						</script>
-
-
-
-
-
-
-
-
 
 
 						<!-- Post -->
 							<section class="post">
 								<header class="major">
 									<span class="date">Light Condition</span>
-
-
-
-
-
-
-
-									 Please input:
+        							 Please input:
 
 										<br>
 
@@ -162,12 +138,12 @@
 				}
 
 			</script>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+			<!-- Scripts -->
+            <script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
+            <script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
+            <script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
+            <script src="{% static 'website/assets/js/skel.min.js' %}"></script>
+            <script src="{% static 'website/assets/js/util.js' %}"></script>
+            <script src="{% static 'website/assets/js/main.js' %}"></script>
 	</body>
 </html>
