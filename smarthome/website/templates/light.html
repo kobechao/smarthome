@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
         <noscript><link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" /></noscript>
+
 	</head>
 	<body class="is-loading">
 
@@ -54,12 +55,29 @@
 						<script>
 								function light(sw) {
 									var pic;
+                                    var lightStatus;
 									if (sw == 0) {
                                         pic = "{% static 'website/images/pic_bulboff.gif' %}"
+                                        lightStatus = 'OFF'
                                     } else {
                                         pic = "{% static 'website/images/pic_bulbon.gif' %}"
+                                        lightStatus = 'ON'
                                     }
 									document.getElementById('myImage').src = pic;
+                                    $.ajaxSetup({
+                                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                                    });
+
+                                    $.ajax({
+                                        url: '/website/light.html',
+                                        data: {
+                                            device: lightStatus,
+                                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                                            },
+                                        }).done( function(result){
+                                            // console.log( result.toString() )
+                                            // do something after sending post
+                                        });
 								}
 						</script>
 
@@ -139,35 +157,66 @@
 					console.log("AAA");
 					document.getElementById("output").value = input;
 				}
-				function myfunction() {
-					document.getElementById("aaa").innerHTML = '{<br>"Samsung Induction Cooker":{<br>"Name": "Samsung Induction Cooker",<br>"Manufacturer":"Samsung",<br>"Manufacturing Date":"09/12",<br>"Service":["Boil", "Braise", "Deep-fry", "Preheat"]<br>}<br>}'
-				}
-				function myfunction_1() {
-					document.getElementById("aaa").innerHTML = '{<br>"Samsung Refrigerator":{<br>"Name": "Samsung Refrigerator",<br>"Manufacturer":"Samsung",<br>"Manufacturing Date":"09/12",<br>"Service":["Chilling", "Ice Making"]<br>}<br>}'
-				}
-				function myfunction_2() {
-					document.getElementById("aaa").innerHTML = '{<br>"Samsung Alarm":{<br>"Name": "Samsung Alarm",<br>"Manufacturer":"Samsung",<br>"Manufacturing Date":"09/12",<br>"Service":["On", "Off"]<br>}<br>}'
-				}
+
 
 				function change(n,c) {
+				    document.getElementById("volume" + n).innerHTML = c
+                    $.ajaxSetup({
+                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    });
 
-				document.getElementById("volume" + n).innerHTML = c
+                    $.ajax({
+                        url: '/website/light.html',
+                        data: {
+                            device: c,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        }).done( function(result){
+
+                        });
 				}
 
 				function up(n) {
 					document.getElementById("volume" + n).innerHTML = ++volume[n]
+                    $.ajaxSetup({
+                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    });
+
+                    $.ajax({
+                        url: '/website/light.html',
+                        data: {
+                            device: text,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        }).done( function(result){
+
+                        });
 				}
 				function down(n) {
 					document.getElementById("volume" + n).innerHTML = --volume[n]
+                    $.ajaxSetup({
+                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    });
+
+                    $.ajax({
+                        url: '/website/light.html',
+                        data: {
+                            device: text,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        }).done( function(result){
+
+                        });
 				}
 
 			</script>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+			<script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'website/assets/js/skel.min.js' %}"></script>
+			<script src="{% static 'website/assets/js/util.js' %}"></script>
+			<script src="{% static 'website/assets/js/main.js' %}"></script>
 
 	</body>
 </html>

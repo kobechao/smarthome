@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
         <noscript><link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" /></noscript>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	</head>
 	<body class="is-loading">
 
@@ -49,8 +50,8 @@
 
 
 
-
-										<div id="aaa"></div>
+                                        <!-- <form method="POST" action=""> -->
+										<div id="json_result"></div>
 
 										<div>Cooker temperature:
 											<div id="volume0">99</div>
@@ -86,6 +87,7 @@
 											<option value="Samsung Alarm" onclick="myfunction_2()">Samsung Alarm</option>
 										</select>
 										<br>
+                                        <!-- </form> -->
 
 
 
@@ -115,18 +117,66 @@
 
 				function aclick() {
 					var input = document.getElementById("input").value;
-					console.log("AAA");
+					console.log("json_result");
 					document.getElementById("output").value = input;
 				}
 				function myfunction() {
-					document.getElementById("aaa").innerHTML = '{<br>"Samsung Induction Cooker":{<br>"Name": "Samsung Induction Cooker",<br>"Manufacturer":"Samsung",<br>"Cooker temperature":"</div>'+volume[0]+'",<br>"Manufacturing Date":"09/12",<br>"Service":["Boil", "Braise", "Deep-fry", "Preheat"]<br>}<br>}'
-				}
+
+                    var text = '{"Samsung Induction Cooker":"Name": "Samsung Induction Cooker","Manufacturer":"Samsung","Cooker temperature":'+volume[0]+',"Manufacturing Date":"09/12","Service":["Boil", "Braise", "Deep-fry", "Preheat"]}'
+					console.log( text )
+                    document.getElementById("json_result").innerHTML = text
+				    $.ajaxSetup({
+                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    });
+
+                    $.ajax({
+                        url: '/website/generic.html',
+                        data: {
+                            device: text,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        }).done( function(result){
+                            // console.log( result.toString() )
+                            // do something after sending post
+                        });
+                }
 				function myfunction_1() {
-					document.getElementById("aaa").innerHTML = '{<br>"Samsung Refrigerator":{<br>"Name": "Samsung Refrigerator",<br>"Manufacturer":"Samsung",<br>"Refrigerator temperature":"</div>'+volume[1]+'",<br>Manufacturing Date":"09/12",<br>"Service":["Chilling", "Ice Making"]<br>}<br>}'
-				}
+                    var text = '{"Samsung Refrigerator":{"Name": "Samsung Refrigerator","Manufacturer":"Samsung","Refrigerator temperature":"'+volume[1]+'",Manufacturing Date":"09/12","Service":["Chilling", "Ice Making"]}}'
+					document.getElementById("json_result").innerHTML = text
+				    $.ajaxSetup({
+                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    });
+
+                    $.ajax({
+                        url: '/website/generic.html',
+                        data: {
+                            device: text,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        }).done( function(result){
+                            // console.log( result.toString() )
+                            // do something after sending post
+                        });
+                }
 				function myfunction_2() {
-					document.getElementById("aaa").innerHTML = '{<br>"Samsung Alarm":{<br>"Name": "Samsung Alarm",<br>"Manufacturer":"Samsung",<br>"Alarm Volume":"</div>'+volume[2]+'",<br>Manufacturing Date":"09/12",<br>"Service":["On", "Off"]<br>}<br>}'
-				}
+
+                    var text = '{"Samsung Alarm":{"Name": "Samsung Alarm","Manufacturer":"Samsung","Alarm Volume":"'+volume[2]+'",Manufacturing Date":"09/12","Service":["On", "Off"]}}'
+					document.getElementById("json_result").innerHTML = text
+				    $.ajaxSetup({
+                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    });
+
+                    $.ajax({
+                        url: '/website/generic.html',
+                        data: {
+                            device: text,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        }).done( function(result){
+                            // console.log( result.toString() )
+                            // do something after sending post
+                        });
+                }
 
 				function up(n) {
 					document.getElementById("volume" + n).innerHTML = ++volume[n]

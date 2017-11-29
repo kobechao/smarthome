@@ -10,7 +10,6 @@ urlpatterns = [
     url(r'^index', views.index, name='index'),
     url(r'^generic', views.generic),
     url(r'^light', views.light),
-    url(r'^fjs', views.fjs),
     url(r'^login', views.login),
 
 ] + static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
