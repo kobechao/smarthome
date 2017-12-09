@@ -1,146 +1,149 @@
 <!DOCTYPE HTML>
 
 <html>
-	{% load static %}
-    <head>
-        <title>Login</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
-        <noscript><link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" /></noscript>
+{% load static %}
 
-	</head>
-	<body class="is-loading">
+<head>
+    <title>Login</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
+    <noscript>
+        <link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" />
+    </noscript>
+    <style type="text/css">
+        .container {
+            overflow: hidden;
+        }
 
-		<!-- Wrapper -->
-			<div id="wrapper" class="fade-in">
+        .right {
+            font-size: 25px;
+            color: #96653E;
+            font-family: Microsoft JhengHei;
+            float: right;
+            width: 50%;
+        }
 
+        .left {
+            font-size: 25px;
+            color: #96653E;
+            font-family: Microsoft JhengHei;
+            float: left;
+            width: 50%;
+        }
+    </style>
+</head>
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Smart Home</a>
-					</header>
+<body class="is-loading">
 
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li><a href="index.html"> Room From 1 to 2</a></li>
-							<li><a href="light.html">open or close a light</a></li>
-							<li><a href="generic.html">Furniture controller</a></li>
+    <!-- Wrapper -->
+    <div id="wrapper" class="fade-in">
 
+        <!-- Header -->
+        <header id="header">
+            <a href="index.html" class="logo">Smart Home</a>
+        </header>
 
-						</ul>
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                <li><a href="index.html">Home Services</a></li>
+                <li><a href="light.html">Device Manipulations( Light DEMO )</a></li>
+                <li><a href="generic.html">Furniture controller</a></li>
 
-						<ul class="icons">
-              <li><a href="login.html" class="button">Login</a></li>
-							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            </ul>
 
-							<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
+            <ul class="icons">
+                <li><a href="login.html" class="button">Login</a></li>
+                <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 
-					</nav>
+                <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+            </ul>
 
-				<!-- Main -->
-				<div >
-					<div id="main">
+        </nav>
 
-						<!-- Featured Post -->
+        <!-- Main -->
+        <div>
+            <div id="main">
 
-							<article class="post featured">
-								<header class="major">
-									<span class="date">Login</span>
+                <!-- Featured Post -->
 
-								</header>
-							<!--	<a href="#" class="image main"><img src="images/pic01.jpg" alt="" /></a> -->
+                <article class="post featured">
+                    <header class="major">
+                        <span class="date">Login</span>
+                        <button type="button" onclick="document.getElementById('demo').innerHTML = Date()">
+                            Click me to display Date and Time.</button>
+                        <p id="demo"></p>
 
+                    </header>
 
+                    <div class='container'>
+                        <div class='left'>
+                            請輸入設備資訊 ↓
+                            <input type="text" id="device_name" style="width: 80%; margin: 10px" placeholder="請輸入設備名稱" required>
+                            <input type="text" id="device_id" style="width: 80%; margin: 10px" placeholder="請輸入設備帳號" required>
+                            <input type="password" id="device_pwd" style="width: 80%; margin: 10px" placeholder="請輸入設備密碼" required>
+                        </div>
+                        <div class='right'>
+                            請輸入家庭伺服器的資訊 ↓
+                            <input type="text" id="server_id" style="width: 80%; margin: 10px" placeholder="請輸入伺服器帳號" required>
+                            <input type="password" id="server_pwd" style="width: 80%; margin: 10px" placeholder="請輸入伺服器密碼" required>
+                        </div>
 
-								<!--  gif setting-->
-								<script>
-									function showconnect(sw) {
-										var pic;
-										if (sw == 0) {
-                                            pic = "{% static 'website/images/connect_0.jpg' %}"
-                                        } else {
-                                            pic = "{% static 'website/images/connect_1.jpg' %}"
-                                        }
-										document.getElementById('myImage').src = pic;
-									}
-								</script>
+                    </div>
+                    <p></p>
+                    <button id="btn" onclick="login()">登入</button>
+                    <button id="btn" onclick="">註冊</button>
 
-								<img id="myImage" src="{% static 'website/images/connect_0.jpg' %}" width="400" height="400">
+            </div>
 
-								<p>
-								<button type="button" onclick="showconnect(1)">Connected</button>
-								<button type="button" onclick="showconnect(0)">Not connected</button>
-								</p>
+            </article>
 
+        </div>
 
+        <script language="javascript">
+            function login() {
+                console.log($("#device_name").val())
+                console.log($("#device_id").val())
+                console.log($("#server_id").val())
+                console.log($("#server_pwd").val())
 
-               Account:
-								<input type="text" id="input" name="欄位名稱">
-							Password:
+                $.ajaxSetup({
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                });
 
+                $.ajax({
+                    url: '/website/login.html',
+                    data: {
+                        device_name: $("#device_name").val(),
+                        device_id: $("#device_id").val(),
+                        device_pwd: $("#device_pwd").val(),
+                        server_id: $("#server_id").val(),
+                        server_pwd: $("#server_pwd").val(),
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function( response ) {
 
+                    },
 
-								<input type="text" id="output" name="欄位名稱">
-								<br>
-								<button id="btn" onclick="">登入</button>
-							  <button id="btn" onclick="">註冊</button>
+                }).done(function(result) {
+                    console.log( "SUCCESS")
+                    alert( "Login Successed!");
+                    window.location.href = 'index.html';
+                });
 
-								<br>
-							</div>
+            }
+        </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
+        <script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
+        <script src="{% static 'website/assets/js/skel.min.js' %}"></script>
+        <script src="{% static 'website/assets/js/util.js' %}"></script>
+        <script src="{% static 'website/assets/js/main.js' %}"></script>
 
+</body>
 
-
-
-
-
-
-
-							</article>
-
-
-
-
-
-
-			</div>
-
-
-										<script language="javascript">
-												//var input = document.getElementById("input").value;
-
-												var volume = [1]
-
-												function aclick() {
-													var input = document.getElementById("input").value;
-													console.log("AAA");
-													document.getElementById("output").value = input;
-												}
-												function change(n,c) {
-
-													document.getElementById("volume" + n).innerHTML = c
-												}
-
-												function up(n) {
-
-													document.getElementById("volume" + n).innerHTML = ++volume[n]
-												}
-												function down(n) {
-
-													document.getElementById("volume" + n).innerHTML = --volume[n]
-												}
-
-											</script>
-
-		<!-- Scripts -->
-			<script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
-            <script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
-            <script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
-            <script src="{% static 'website/assets/js/skel.min.js' %}"></script>
-            <script src="{% static 'website/assets/js/util.js' %}"></script>
-            <script src="{% static 'website/assets/js/main.js' %}"></script>
-
-	</body>
 </html>

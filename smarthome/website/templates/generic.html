@@ -1,197 +1,237 @@
 <!DOCTYPE HTML>
 
 <html>
-	{% load static %}
-    <head>
-        <title>Furniture controller</title>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
-        <noscript><link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" /></noscript>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	</head>
-	<body class="is-loading">
+{% load static %}
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+<head>
+    <title>Furniture controller</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'website/assets/css/main.css' %}" />
+    <noscript>
+        <link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" />
+    </noscript>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <style type="text/css">
+        .container {
+            overflow: hidden;
+        }
 
-				<!-- Header -->
-					<header id="header">
-						<a href="index.html" class="logo">Smart Home</a>
-					</header>
+        .right {
+            font-size: 20px;
+            color: #DF8FA3;
+            font-family: Microsoft JhengHei;
+            float: right;
+            width: 50%;
+        }
 
-				<!-- Nav -->
-					<nav id="nav">
-						<ul class="links">
-							<li><a href="index.html">Room From 1 to 2</a></li>
+        .left {
+            font-size: 20px;
+            color: #DF8FA3;
+            font-family: Microsoft JhengHei;
+            float: left;
+            width: 50%;
+        }
+    </style>
+</head>
 
-							<li><a href="light.html">open or close a light</a></li>
-							<li class="active"><a href="generic.html">Furniture controller</a></li>
+<body class="is-loading" onload="ShowTime()">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <a href="index.html" class="logo">Smart Home</a>
+        </header>
+
+        <!-- Nav -->
+        <nav id="nav">
+            <ul class="links">
+                <li><a href="index.html">Home Services</a></li>
+                <li><a href="light.html">Device Manipulations( Light DEMO ) </a></li>
+                <li class="active"><a href="generic.html">Furniture controller</a></li>
+
+            </ul>
+            <ul class="icons">
+                <li><a href="login.html" class="button">Login</a></li>
+                <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+
+                <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+            </ul>
+        </nav>
+
+        <!-- Main -->
+        <div id="main">
+
+            <!-- Post -->
+            <section class="post">
+                <header class="major">
+                    <span class="date" id="time"></span>
+
+                    <!-- <form method="POST" action=""> -->
+                    <div id="json_result"></div>
+
+                    <div class='container'>
+                        <div class='left'>
+                            <div>Cooker temperature:
+                                <div id="volume0">99</div>
+                            </div>
+                            <button onclick="up(0)">up</button>
+                            <button onclick="down(0)">down</button>
+                            <select id="sel" size="2" style="width: 80%; align: center " >
+                                <option value="Samsung Induction Cooker" onclick="myfunction()" >Samsung Induction Cooker</option>
+                            </select>
+                            <br>
+                        </div>
+                        <div class='right'>
+                            <div>Refrigerator temperature:
+                                <div id="volume1">15</div>
+                            </div>
+                            <button onclick="up(1)">up</button>
+                            <button onclick="down(1)">down</button>
+                            <select id="sel" size="2" style="width: 80%; align: center">
+                                <option value="Samsung Refrigerator" onclick="myfunction_1()" style="width: 80%">Samsung Refrigerator</option>
+                            </select>
+                            <br>
+
+                        </div>
+
+                    </div>
+
+                    <div class='container'>
+                        <div class='left'>
+                            <div>Alarm Volume:
+                                <div id="volume2">20</div>
+                            </div>
+                            <button onclick="up(2)">up</button>
+                            <button onclick="down(2)">down</button>
+                            <select id="sel" size="2" style="width: 80%; align: center">
+                                <option value="Samsung Alarm" onclick="myfunction_2()" style="width: 80%">Samsung Alarm</option>
+                            </select>
+                            <br>
+                        </div>
+                        <div class='right'>
 
 
-						</ul>
-						<ul class="icons">
-              <li><a href="login.html" class="button">Login</a></li>
-							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                        </div>
 
-							<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav>
-
-				<!-- Main -->
-					<div id="main">
-
-						<!-- Post -->
-							<section class="post">
-								<header class="major">
-									<span class="date">NCCUCS</span>
+                    </div>
 
 
 
+                </header>
+                <!--    <div class="image main"><img src="images/pic01.jpg" alt="" /></div> -- >
+                                <p>123</p>
+                                <p>123</p>
+                            </section>
 
+                    </div>
 
-                                        <!-- <form method="POST" action=""> -->
-										<div id="json_result"></div>
+            </div>
 
-										<div>Cooker temperature:
-											<div id="volume0">99</div>
-										</div>
-										<button onclick="up(0)">up</button>
-										<button onclick="down(0)">down</button>
-										<select id="sel" size="2">
-											<option value="Samsung Induction Cooker" onclick="myfunction()">Samsung Induction Cooker</option>
-										</select>
-										<br>
+        <!-- Scripts -->
+                <script language="javascript">
+                    //var input = document.getElementById("input").value;
 
+                    var volume = [99, 15, 20]
 
+                    function aclick() {
+                        var input = document.getElementById("input").value;
+                        console.log("json_result");
+                        document.getElementById("output").value = input;
+                    }
 
-										<div>Refrigerator temperature:
-											<div id="volume1">15</div>
-										</div>
-										<button onclick="up(1)">up</button>
-										<button onclick="down(1)">down</button>
-										<select id="sel" size="2">
-											<option value="Samsung Refrigerator" onclick="myfunction_1()">Samsung Refrigerator</option>
-										</select>
-										<br>
+                    function myfunction() {
 
-
-
-
-										<div>Alarm Volume:
-											<div id="volume2">20</div>
-										</div>
-										<button onclick="up(2)">up</button>
-										<button onclick="down(2)">down</button>
-										<select id="sel" size="2">
-											<option value="Samsung Alarm" onclick="myfunction_2()">Samsung Alarm</option>
-										</select>
-										<br>
-                                        <!-- </form> -->
-
-
-
-
-
-
-
-								</header>
-							<!--	<div class="image main"><img src="images/pic01.jpg" alt="" /></div> -- >
-								<p>123</p>
-								<p>123</p>
-							</section>
-
-					</div>
-
-
-
-
-
-			</div>
-
-		<!-- Scripts -->
-		  <script language="javascript">
-				//var input = document.getElementById("input").value;
-
-				var volume = [99, 15, 20]
-
-				function aclick() {
-					var input = document.getElementById("input").value;
-					console.log("json_result");
-					document.getElementById("output").value = input;
-				}
-				function myfunction() {
-
-                    var text = '{"Samsung Induction Cooker":"Name": "Samsung Induction Cooker","Manufacturer":"Samsung","Cooker temperature":'+volume[0]+',"Manufacturing Date":"09/12","Service":["Boil", "Braise", "Deep-fry", "Preheat"]}'
-					console.log( text )
-                    document.getElementById("json_result").innerHTML = text
-				    $.ajaxSetup({
-                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
-                    });
-
-                    $.ajax({
-                        url: '/website/generic.html',
-                        data: {
-                            device: text,
-                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        var text = '{"Samsung Induction Cooker":"Name": "Samsung Induction Cooker","Manufacturer":"Samsung","Cooker temperature":' + volume[0] + ',"Manufacturing Date":"09/12","Service":["Boil", "Braise", "Deep-fry", "Preheat"]}'
+                        console.log(text)
+                        document.getElementById("json_result").innerHTML = text
+                        $.ajaxSetup({
+                            data: {
+                                csrfmiddlewaretoken: '{{ csrf_token }}'
                             },
-                        }).done( function(result){
+                        });
+
+                        $.ajax({
+                            url: '/website/generic.html',
+                            data: {
+                                device: text,
+                                csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        }).done(function(result) {
                             // console.log( result.toString() )
                             // do something after sending post
                         });
-                }
-				function myfunction_1() {
-                    var text = '{"Samsung Refrigerator":{"Name": "Samsung Refrigerator","Manufacturer":"Samsung","Refrigerator temperature":"'+volume[1]+'",Manufacturing Date":"09/12","Service":["Chilling", "Ice Making"]}}'
-					document.getElementById("json_result").innerHTML = text
-				    $.ajaxSetup({
-                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
-                    });
+                    }
 
-                    $.ajax({
-                        url: '/website/generic.html',
-                        data: {
-                            device: text,
-                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                    function myfunction_1() {
+                        var text = '{"Samsung Refrigerator":{"Name": "Samsung Refrigerator","Manufacturer":"Samsung","Refrigerator temperature":"' + volume[1] + '",Manufacturing Date":"09/12","Service":["Chilling", "Ice Making"]}}'
+                        document.getElementById("json_result").innerHTML = text
+                        $.ajaxSetup({
+                            data: {
+                                csrfmiddlewaretoken: '{{ csrf_token }}'
                             },
-                        }).done( function(result){
+                        });
+
+                        $.ajax({
+                            url: '/website/generic.html',
+                            data: {
+                                device: text,
+                                csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        }).done(function(result) {
                             // console.log( result.toString() )
                             // do something after sending post
                         });
-                }
-				function myfunction_2() {
+                    }
 
-                    var text = '{"Samsung Alarm":{"Name": "Samsung Alarm","Manufacturer":"Samsung","Alarm Volume":"'+volume[2]+'",Manufacturing Date":"09/12","Service":["On", "Off"]}}'
-					document.getElementById("json_result").innerHTML = text
-				    $.ajaxSetup({
-                        data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
-                    });
+                    function myfunction_2() {
 
-                    $.ajax({
-                        url: '/website/generic.html',
-                        data: {
-                            device: text,
-                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        var text = '{"Samsung Alarm":{"Name": "Samsung Alarm","Manufacturer":"Samsung","Alarm Volume":"' + volume[2] + '",Manufacturing Date":"09/12","Service":["On", "Off"]}}'
+                        document.getElementById("json_result").innerHTML = text
+                        $.ajaxSetup({
+                            data: {
+                                csrfmiddlewaretoken: '{{ csrf_token }}'
                             },
-                        }).done( function(result){
+                        });
+
+                        $.ajax({
+                            url: '/website/generic.html',
+                            data: {
+                                device: text,
+                                csrfmiddlewaretoken: '{{ csrf_token }}'
+                            },
+                        }).done(function(result) {
                             // console.log( result.toString() )
                             // do something after sending post
                         });
-                }
+                    }
 
-				function up(n) {
-					document.getElementById("volume" + n).innerHTML = ++volume[n]
-				}
-				function down(n) {
-					document.getElementById("volume" + n).innerHTML = --volume[n]
-				}
+                    function up(n) {
+                        document.getElementById("volume" + n).innerHTML = ++volume[n]
+                    }
 
-			</script>
-			<script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
-            <script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
-            <script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
-            <script src="{% static 'website/assets/js/skel.min.js' %}"></script>
-            <script src="{% static 'website/assets/js/util.js' %}"></script>
-            <script src="{% static 'website/assets/js/main.js' %}"></script>
+                    function down(n) {
+                        document.getElementById("volume" + n).innerHTML = --volume[n]
+                    }
 
-	</body>
+                    function ShowTime() {
+                        var NowDate=new Date();
+                        var h=NowDate.getHours();
+                        var m=NowDate.getMinutes();
+                        var s=NowDate.getSeconds();　
+                        $("#time").html( '現在時刻: ' + h + '時' + m + '分' + s + '秒' )
+                        setTimeout('ShowTime()', 1000 );
+                    }
+                </script>
+                <script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
+                <script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
+                <script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
+                <script src="{% static 'website/assets/js/skel.min.js' %}"></script>
+                <script src="{% static 'website/assets/js/util.js' %}"></script>
+                <script src="{% static 'website/assets/js/main.js' %}"></script>
+
+</body>
+
 </html>
