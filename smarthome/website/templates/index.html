@@ -12,6 +12,36 @@
         <link rel="stylesheet" href="{% static 'website/assets/css/noscript.css' %}" />
     </noscript>
 
+    <style type="text/css">
+        .container {
+            overflow: hidden;
+        }
+
+        .right {
+            font-size: 20px;
+            color: #A3344C;
+            font-family: Microsoft JhengHei;
+            float: right;
+            width: 50%;
+        }
+
+        .left:hover {
+            background: #DEFF92;
+        }
+
+        .right:hover {
+            background: #DEFF92;
+        }
+
+        .left {
+            font-size: 20px;
+            color: #A3344C;
+            font-family: Microsoft JhengHei;
+            float: left;
+            width: 50%;
+        }
+    </style>
+
 </head>
 
 <body class="is-loading" onload="ShowTime()">
@@ -60,68 +90,126 @@
                     <span><a href="#" style="font-size: 30px; font-family: fantasy ">Control Your Home Services More Convenient</a></span>
                 </header>
 
-                <header class="major">
-                    <span class="date">TEST</span>
-                </header>
-
-                <div>
-                    Please input:
+                <div style="font-size: 18px">
+                    Available Services:
                 </div>
-                <input type="text" id="input" name="欄位名稱">
 
-                <button id="btn" onclick="aclick()">show result</button>
+                <div class='container'>
+                    <div class='left' onclick="activateServices('REFRIG')">
+                        <img src="https://image.flaticon.com/icons/png/128/72/72040.png" style="margin: 3px 0px 3px 0px;">
+                        <div> Activate your refrig by your owns </div>
+                        <div>
+                            <img id="activate_ok">
+                        </div>
+                    </div>
+                    <div class='right' onclick="activateServices('PHONE')">
+                        <img src="https://www.shareicon.net/data/128x128/2015/09/26/646900_phone_512x512.png" style="margin: 3px 0px 3px 0px;">
+                        <div> Activate your phone by your owns </div>
+                        <div>
+                            <img id="activate_ok">
+                        </div>
+                    </div>
+                    <input type="text" id="input" name="欄位名稱">
 
-                <input type="button" value="Show me" onclick="aclick()">
+                    <button id="btn" onclick="aclick()">show result</button>
 
-                <input type="text" id="output" name="欄位名稱">
+                    <input type="button" value="Show me" onclick="aclick()">
 
-                <br>
+                    <input type="text" id="output" name="欄位名稱">
 
-                <div> 1 or 2 room:
+                    <!--  <div> 1 or 2 room:
                     <div id="volume0">1 </div>
 
                 </div>
                 <button onclick="change(0,2)">2 room</button>
-                <button onclick="change(0,1)">1 room</button>
+                <button onclick="change(0,1)">1 room</button> -->
 
             </article>
 
-        </div>
+            </div>
 
-        <script language="javascript">
+            <script language="javascript">
+                function ShowTime() {
+                    var NowDate = new Date();
 
-            function ShowTime() {
-                var NowDate=new Date();
+                    var h = NowDate.getHours();
+                    var m = NowDate.getMinutes();
+                    var s = NowDate.getSeconds();　
+                    $("#time").html('現在時刻: ' + h + '時' + m + '分' + s + '秒')
+                        // $("#time").html( new Date() )
+                    setTimeout('ShowTime()', 1000);
+                }
 
-                var h=NowDate.getHours();
-                var m=NowDate.getMinutes();
-                var s=NowDate.getSeconds();　
-                $("#time").html( '現在時刻: ' + h + '時' + m + '分' + s + '秒' )
-                // $("#time").html( new Date() )
-                setTimeout('ShowTime()', 1000 );
-            }
+                function aclick() {
+                    var input = document.getElementById("input").value;
+                    console.log("AAA");
+                    document.getElementById("output").value = input;
+                }
 
-            function aclick() {
-                var input = document.getElementById("input").value;
-                console.log("AAA");
-                document.getElementById("output").value = input;
-            }
+                function change(n, c) {
 
-            function change(n, c) {
+                    document.getElementById("volume" + n).innerHTML = c
+                }
 
-                document.getElementById("volume" + n).innerHTML = c
-            }
+                function activateServices(service) {
+                    console.log(service.toString());
+                    switch (service) {
+                        case 'REFRIG':
+                            $.ajaxSetup({
+                                data: {
+                                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                                },
+                            });
 
-        </script>
+                            $.ajax({
+                                url: '/website/index.html',
+                                data: {
+                                    device: service.toString(),
+                                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                                },
+                            }).done(function(result) {
+                                alert( "Activate Success!" );
+                                $("#activate_ok").attr("src","https://deckbox.org/images/icons/32x32/ok.png");
 
-        <!-- Scripts -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
-        <script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
-        <script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
-        <script src="{% static 'website/assets/js/skel.min.js' %}"></script>
-        <script src="{% static 'website/assets/js/util.js' %}"></script>
-        <script src="{% static 'website/assets/js/main.js' %}"></script>
+                            });
+                            break;
+
+                        case 'PHONE':
+                            alert("Phone services is not available")
+                            $.ajaxSetup({
+                                data: {
+                                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                                },
+                            });
+
+                            $.ajax({
+                                url: '/website/index.html',
+                                data: {
+                                    device: service.toString(),
+                                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                                },
+                            }).done(function(result) {
+                                alert( "Activate Success!" );
+                                $("#activate_ok").attr("src","https://www.drivermax.com/images/close_icon.png");
+
+                            });
+                            break;
+                        default:
+                            alert("Default services is not available")
+                            break;
+                    }
+
+                }
+            </script>
+
+            <!-- Scripts -->
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="{% static 'website/assets/js/jquery.min.js' %}"></script>
+            <script src="{% static 'website/assets/js/jquery.scrollex.min.js' %}"></script>
+            <script src="{% static 'website/assets/js/jquery.scrolly.min.js' %}"></script>
+            <script src="{% static 'website/assets/js/skel.min.js' %}"></script>
+            <script src="{% static 'website/assets/js/util.js' %}"></script>
+            <script src="{% static 'website/assets/js/main.js' %}"></script>
 
 </body>
 

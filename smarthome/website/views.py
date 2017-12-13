@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 # from light import lightOnOff
 
 def index( request ):
+    if request.GET :
+        print( request.GET )
     return render( request, 'index.html' )
 
 def generic( req ) :
