@@ -40,6 +40,13 @@
             float: left;
             width: 50%;
         }
+
+       #Footer {
+        　height: 100px;
+        　position: relative;
+        　margin-top: -100px;
+        }
+
     </style>
 
 </head>
@@ -68,31 +75,25 @@
         <nav id="nav">
             <ul class="links">
                 <li class="active"><a href="index.html">Home Services</a></li>
-                <li><a href="light.html">Device Manipulations( Light DEMO )</a></li>
                 <li><a href="generic.html">Furniture controller</a></li>
 
             </ul>
-
             <ul class="icons">
                 <li><a href="login.html" class="button">Login</a></li>
-                <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-                <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
             </ul>
+
+
 
         </nav>
 
         <!-- Main -->
         <div id="main">
 
-            <article class="post featured">
+            <div class="post featured">
                 <header class="major">
                     <span class="date" id="time"></span>
                     <span><a href="#" style="font-size: 30px; font-family: fantasy ">Control Your Home Services More Convenient</a></span>
                 </header>
-
-                <div style="font-size: 18px">
-                    Available Services:
-                </div>
 
                 <div class='container'>
                     <div class='left' onclick="activateServices('REFRIG')">
@@ -109,24 +110,39 @@
                             <img id="activate_fail">
                         </div>
                     </div>
-                    <input type="text" id="input" name="欄位名稱">
 
-                    <button id="btn" onclick="aclick()">show result</button>
-
-                    <input type="button" value="Show me" onclick="aclick()">
-
-                    <input type="text" id="output" name="欄位名稱">
-
-                    <!--  <div> 1 or 2 room:
-                    <div id="volume0">1 </div>
 
                 </div>
-                <button onclick="change(0,2)">2 room</button>
-                <button onclick="change(0,1)">1 room</button> -->
 
-            </article>
+                <div class='container'>
+                    <div class='left'>
+                        <img id="bulb" src="{% static 'website/images/pic_bulboff.gif' %}" width="100" height="180" style="margin: 3px 0px 3px 0px;">
+                        <div> Turn On Your Light </div>
+                        <div>
+                            <button type="button" onclick="light(1)">Light On</button>
+                            <button type="button" onclick="light(0)">Light Off</button>
+                        </div>
+                    </div>
+                    <div class='right' onclick="activateServices('TEST')">
+                        <!-- <img src="https://www.shareicon.net/data/128x128/2015/09/26/646900_phone_512x512.png" style="margin: 3px 0px 3px 0px;">
+                        <div> Activate your phone by your owns </div>
+                        <div>
+                            <img id="activate_fail"> -->
+                        <!-- </div> -->
+                    </div>
+
+
+                </div>
 
             </div>
+
+            </div>
+
+        <div id="Footer">
+          <p>Posted by: Hege Refsnes</p>
+          <p>Contact information: <a href="mailto:someone@example.com">
+          someone@example.com</a>.</p>
+        </div>
 
             <script language="javascript">
                 function ShowTime() {
@@ -146,9 +162,33 @@
                     document.getElementById("output").value = input;
                 }
 
-                function change(n, c) {
+                function light( status ) {
+                    var lightStatus;
+                    if (status == 0) {
+                        $("#bulb").attr("src","{% static 'website/images/pic_bulboff.gif' %}");
+                        lightStatus = 'OFF'
+                    } else {
+                        $("#bulb").attr("src","{% static 'website/images/pic_bulbon.gif' %}");
+                        lightStatus = 'ON'
+                    }
 
-                    document.getElementById("volume" + n).innerHTML = c
+                    $.ajaxSetup({
+                        data: {
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        },
+                    });
+
+                    $.ajax({
+                        url: '/website/light.html',
+                        data: {
+                            device: lightStatus,
+                            csrfmiddlewaretoken: '{{ csrf_token }}'
+                        },
+                    }).done(function(result) {
+                        alert( "Turn " + lightStatus.toString() + " the light " );
+
+                        // do something after sending post
+                    });
                 }
 
                 function activateServices(service) {
@@ -189,11 +229,12 @@
                                     csrfmiddlewaretoken: '{{ csrf_token }}'
                                 },
                             }).done(function(result) {
-                                alert( "Activate Success!" );
                                 $("#activate_fail").attr("src","https://www.drivermax.com/images/close_icon.png");
 
                             });
                             break;
+
+
                         default:
                             alert("Default services is not available")
                             break;

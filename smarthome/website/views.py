@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-# from light import lightOnOff
 
 def index( request ):
     if request.GET :
@@ -25,7 +24,6 @@ def light( req ) :
     if req.GET :
         lightStatus = req.GET
         print( lightStatus['device'] )
-        # lightOnOff( 17, posts['switch'] )
 
     return render( req, 'light.html' )
 
