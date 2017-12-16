@@ -45,11 +45,34 @@ def login( req ) :
         if not os.path.isdir ( path ) :
             os.makedirs ( path )
             DEVICE_NAME = loginDatas['device_id']
+            print( DEVICE_NAME)
 
-        with open( os.path.join( os.getcwd(), path ) + "/login.json" , "w+" ) as rlt :
-            import json
-            print( "open file" )
-            rlt.write( json.dumps( loginDatas ) )
-            rlt.close()
+        try :
+            with open( os.path.join( os.getcwd(), path ) + "/login.json" , "w+" ) as rlt :
+                import json
+                # print( "open file" )
+                rlt.write( json.dumps( loginDatas ) )
+                rlt.close()
+
+            if os.path.isfile( 'all_login.json' ) :
+                with open( 'all_login.json', 'r' ) as f :
+                    all_login = json.loads( f.read() )
+                    print( all_login )
+                    all_login.update( { loginDatas['device_id']: loginDatas } )
+                    with open( 'all_login.json', 'w+' ) as allFile :
+                        allFile.write( json.dumps( all_login ) )
+                        allFile.close()
+            else :
+                with open( 'all_login.json', 'w+' ) as allFile :
+                    all_login = {}
+                    all_login[ loginDatas['device_id'] ] = loginDatas
+                    allFile.write( json.dumps( all_login ) )
+                    allFile.close()
+
+        except Exception as e :
+            print( type(e), e )
+
+
+
 
     return render( req, 'login.html' )
