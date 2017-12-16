@@ -39,6 +39,9 @@ def login( req ) :
         path = 'Data/%s' % loginDatas['device_id']
         print( path )
 
+        if not os.path.isdir ( path ) :
+            os.makedirs ( path )
+
         with open( os.path.join( os.getcwd(), path ) + "/login.json" , "w+" ) as rlt :
             import json
             print( "open file" )
