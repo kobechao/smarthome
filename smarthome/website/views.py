@@ -38,7 +38,6 @@ def login( req ) :
         with open( "login.json", "w+" ) as rlt :
             import json
             print( "open file" )
-            # rlt.write( json.dumps( loginDatas.pop(, None ) ) )
             rlt.write( json.dumps( loginDatas ) )
             rlt.close()
 

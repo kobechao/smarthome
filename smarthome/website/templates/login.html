@@ -31,6 +31,15 @@
             float: left;
             width: 50%;
         }
+        .device_img {
+
+            vertical-align: middle;
+        }
+        .img_div {
+            margin: 8%;
+        }
+
+
     </style>
 </head>
 
@@ -84,10 +93,24 @@
                             <input type="text" id="device_id" style="width: 80%; margin: 10px" placeholder="請輸入設備帳號" required>
                             <input type="password" id="device_pwd" style="width: 80%; margin: 10px" placeholder="請輸入設備密碼" required>
                         </div>
-                        <div class='right'>
-                            請輸入家庭伺服器的資訊 ↓
-                            <input type="text" id="server_id" style="width: 80%; margin: 10px" placeholder="請輸入伺服器帳號" required>
-                            <input type="password" id="server_pwd" style="width: 80%; margin: 10px" placeholder="請輸入伺服器密碼" required>
+                        <div class="right device_img" style="vertical-align: middle; height: 230.91px;">
+                            將您的設備註冊至家庭中 ←
+                            <div class="left">
+                                <div class="img_div">
+                                    <img class="device_img" src="{% static 'website/images/001.png' %}">
+                                </div>
+                                <div class="img_div">
+                                    <img class="device_img" src="{% static 'website/images/003.png' %}">
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="img_div">
+                                <img class="device_img" src="{% static 'website/images/005.png' %}">
+                                </div>
+                                <div class="img_div">
+                                <img class="device_img" src="{% static 'website/images/007.png' %}">
+                                </div>
+                            </div>
                         </div>
 
                     </div>
