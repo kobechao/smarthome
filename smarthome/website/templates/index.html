@@ -106,7 +106,7 @@
                         <img src="https://www.shareicon.net/data/128x128/2015/09/26/646900_phone_512x512.png" style="margin: 3px 0px 3px 0px;">
                         <div> Activate your phone by your owns </div>
                         <div>
-                            <img id="activate_ok">
+                            <img id="activate_fail">
                         </div>
                     </div>
                     <input type="text" id="input" name="欄位名稱">
@@ -190,7 +190,7 @@
                                 },
                             }).done(function(result) {
                                 alert( "Activate Success!" );
-                                $("#activate_ok").attr("src","https://www.drivermax.com/images/close_icon.png");
+                                $("#activate_fail").attr("src","https://www.drivermax.com/images/close_icon.png");
 
                             });
                             break;
