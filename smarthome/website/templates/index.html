@@ -18,11 +18,12 @@
         }
 
         .right {
+            margin: 2%;
             font-size: 20px;
             color: #A3344C;
             font-family: Microsoft JhengHei;
             float: right;
-            width: 50%;
+            width: 40%;
         }
 
         .left:hover {
@@ -34,11 +35,12 @@
         }
 
         .left {
+            margin: 2%;
             font-size: 20px;
             color: #A3344C;
             font-family: Microsoft JhengHei;
             float: left;
-            width: 50%;
+            width: 40%;
         }
 
        #Footer {
@@ -98,16 +100,16 @@
                 <div class='container'>
                     <div class='left' onclick="activateServices('REFRIG')">
                         <img src="https://image.flaticon.com/icons/png/128/72/72040.png" style="margin: 3px 0px 3px 0px;">
-                        <div> Activate your refrig by your owns </div>
+                        <div> 開啟家電服務 </div>
                         <div>
-                            <img id="activate_ok">
+                            <img id="activate_ok_Refrig">
                         </div>
                     </div>
-                    <div class='right' onclick="activateServices('PHONE')">
+                    <div class='right' onclick="activateServices('DETECT')">
                         <img src="https://www.shareicon.net/data/128x128/2015/09/26/646900_phone_512x512.png" style="margin: 3px 0px 3px 0px;">
-                        <div> Activate your phone by your owns </div>
+                        <div> 驅動您家中的偵測設備 </div>
                         <div>
-                            <img id="activate_fail">
+                            <img id="activate_ok_Detect">
                         </div>
                     </div>
 
@@ -117,7 +119,7 @@
                 <div class='container'>
                     <div class='left'>
                         <img id="bulb" src="{% static 'website/images/pic_bulboff.gif' %}" width="100" height="180" style="margin: 3px 0px 3px 0px;">
-                        <div> Turn On Your Light </div>
+                        <div> 控制您家中的設備 </div>
                         <div>
                             <button type="button" onclick="light(1)">Light On</button>
                             <button type="button" onclick="light(0)">Light Off</button>
@@ -192,9 +194,7 @@
                 }
 
                 function activateServices(service) {
-                    console.log(service.toString());
-                    switch (service) {
-                        case 'REFRIG':
+
                             $.ajaxSetup({
                                 data: {
                                     csrfmiddlewaretoken: '{{ csrf_token }}'
@@ -209,36 +209,37 @@
                                 },
                             }).done(function(result) {
                                 alert( "Activate Success!" );
-                                $("#activate_ok").attr("src","https://deckbox.org/images/icons/32x32/ok.png");
+                                switch (service.toString()) {
+                                    case "REFRIG":
+                                        $("#activate_ok_Refrig").attr("src","https://deckbox.org/images/icons/32x32/ok.png");
+                                        break;
+                                    case "DETECT":
+                                        $("#activate_ok_Detect").attr("src","https://deckbox.org/images/icons/32x32/ok.png");
+                                        break;
+                                    default :
+                                        break;
+                                }
 
                             });
-                            break;
-
-                        case 'PHONE':
-                            alert("Phone services is not available")
-                            $.ajaxSetup({
-                                data: {
-                                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                                },
-                            });
-
-                            $.ajax({
-                                url: '/website/index.html',
-                                data: {
-                                    device: service.toString(),
-                                    csrfmiddlewaretoken: '{{ csrf_token }}'
-                                },
-                            }).done(function(result) {
-                                $("#activate_fail").attr("src","https://www.drivermax.com/images/close_icon.png");
-
-                            });
-                            break;
+                            // break;
 
 
-                        default:
-                            alert("Default services is not available")
-                            break;
-                    }
+                            // $.ajaxSetup({
+                            //     data: {
+                            //         csrfmiddlewaretoken: '{{ csrf_token }}'
+                            //     },
+                            // });
+
+                            // $.ajax({
+                            //     url: '/website/index.html',
+                            //     data: {
+                            //         device: service.toString(),
+                            //         csrfmiddlewaretoken: '{{ csrf_token }}'
+                            //     },
+                            // }).done(function(result) {
+                            //     $("#activate_fail").attr("src","https://www.drivermax.com/images/close_icon.png");
+
+                            // });
 
                 }
             </script>

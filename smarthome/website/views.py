@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+import os
+
 
 def index( request ):
     if request.GET :
@@ -10,7 +12,8 @@ def generic( req ) :
     if req.GET :
         devices = req.GET
         print( devices['device'] )
-        with open( "devices.json", "w+" ) as rlt :
+
+        with open( "Data/%s/devices.json" % (devices['device_id']) , "w+" ) as rlt :
             import json
             print( "open file" )
             rlt.write( json.dumps( devices['device'] ) )
@@ -33,7 +36,10 @@ def login( req ) :
     if req.GET :
         loginDatas = req.GET
         print( loginDatas )
-        with open( "login.json", "w+" ) as rlt :
+        path = 'Data/%s' % loginDatas['device_id']
+        print( path )
+
+        with open( os.path.join( os.getcwd(), path ) + "/login.json" , "w+" ) as rlt :
             import json
             print( "open file" )
             rlt.write( json.dumps( loginDatas ) )
