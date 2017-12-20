@@ -12,8 +12,14 @@ def generic( req ) :
 
     if req.GET :
         devices = req.GET
-        print( DEVICE_NAME )
-        path = 'Data/%s' % DEVICE_NAME
+        import json
+        print( devices['device'] )
+        pathDevice = json.loads( devices['device'] )
+        print( pathDevice )
+        index = list( pathDevice.keys() )[0]
+        print( index )
+        path = 'Data/%s' % index
+        print( path )
         if not os.path.isdir ( path ) :
             os.makedirs ( path )
 

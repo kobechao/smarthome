@@ -141,7 +141,7 @@
 
                     function myfunction() {
 
-                        var text = '{"Samsung Induction Cooker":"Name": "Samsung Induction Cooker","Manufacturer":"Samsung","Cooker temperature":' + volume[0] + ',"Manufacturing Date":"09/12","Service":["Boil", "Braise", "Deep-fry", "Preheat"]}'
+                        var text = '{"Samsung Induction Cooker":{"Name": "Samsung Induction Cooker","Manufacturer":"Samsung","Cooker temperature":' + volume[0] + ',"Manufacturing Date":"09/12","Service":["Boil", "Braise", "Deep-fry", "Preheat"]}}'
                         console.log(text)
                         document.getElementById("json_result").innerHTML = text
                         $.ajaxSetup({
@@ -163,7 +163,7 @@
                     }
 
                     function myfunction_1() {
-                        var text = '{"Samsung Refrigerator":{"Name": "Samsung Refrigerator","Manufacturer":"Samsung","Refrigerator temperature":"' + volume[1] + '",Manufacturing Date":"09/12","Service":["Chilling", "Ice Making"]}}'
+                        var text = '{"Samsung Refrigerator":{"Name": "Samsung Refrigerator","Manufacturer":"Samsung","Refrigerator temperature":"' + volume[1] + '","Manufacturing Date":"09/12","Service":["Chilling", "Ice Making"]}}'
                         document.getElementById("json_result").innerHTML = text
                         $.ajaxSetup({
                             data: {
@@ -185,7 +185,7 @@
 
                     function myfunction_2() {
 
-                        var text = '{"Samsung Alarm":{"Name": "Samsung Alarm","Manufacturer":"Samsung","Alarm Volume":"' + volume[2] + '",Manufacturing Date":"09/12","Service":["On", "Off"]}}'
+                        var text = '{"Samsung Alarm":{"Name": "Samsung Alarm","Manufacturer":"Samsung","Alarm Volume":"' + volume[2] + '","Manufacturing Date":"09/12","Service":["On", "Off"]}}'
                         document.getElementById("json_result").innerHTML = text
                         $.ajaxSetup({
                             data: {
